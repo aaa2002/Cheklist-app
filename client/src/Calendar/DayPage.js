@@ -1,10 +1,10 @@
 import React from "react";
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
 export default function Day() {
-    const [backendData, setBackendData] = useState([{}]);
+  const [backendData, setBackendData] = useState([{}]);
 
   useEffect(() => {
     fetch("/day")
@@ -22,6 +22,21 @@ export default function Day() {
       ) : (
         backendData.tasks.map((task, i) => <p key={i}>{task}</p>)
       )}
+
+      <div>
+        <form className="taskInput">
+          <label>
+            Name:
+            <input type="text" name="name" />
+          </label>
+          <label>
+            Description:
+            <input type="text" name="name" />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+
       <Link to="/">
         <button>Back</button>
       </Link>
