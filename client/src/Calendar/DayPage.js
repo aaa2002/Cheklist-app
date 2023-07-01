@@ -31,14 +31,14 @@ export default function Day() {
           </label>
           <label>
             Description:
-            <input type="text" name="name" />
+            <textarea type="text" name="name" />
           </label>
           <input type="submit" value="Submit" />
         </form>
       </div>
 
       <Link to="/">
-        <button>Back</button>
+        <button className="button">Back</button>
       </Link>
     </div>
   );
