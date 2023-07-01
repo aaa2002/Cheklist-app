@@ -7,7 +7,7 @@ export default function Day() {
     const [backendData, setBackendData] = useState([{}]);
 
   useEffect(() => {
-    fetch("/api")
+    fetch("/day")
       .then((response) => response.json())
       .then((data) => {
         setBackendData(data);
@@ -17,10 +17,10 @@ export default function Day() {
   return (
     <div className="day-page">
       <h1>Day Page</h1>
-      {typeof backendData.users === "undefined" ? (
+      {typeof backendData.tasks === "undefined" ? (
         <p>Loading...</p>
       ) : (
-        backendData.users.map((user, i) => <p key={i}>{user}</p>)
+        backendData.tasks.map((task, i) => <p key={i}>{task}</p>)
       )}
       <Link to="/">
         <button>Back</button>
