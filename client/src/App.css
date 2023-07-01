@@ -1,0 +1,165 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+* {
+  color: #282c34;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.calendar-container {
+  height: 100vh;
+  width: 100%;
+  background-color: #61dafb;
+}
+
+.calendar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #16778f;
+}
+
+.calendar-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  background-color: #104657;
+}
+
+.calendar-body {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  background-color: #c533cb;
+}
+
+.week-days {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #ff0000;
+}
+
+.day-row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.calendar-day {
+  flex: 1;
+}
+
+.calendar-dayToday {
+  flex: 1;
+  background-color: #2b4f5b;
+}
+
+.calendar-day button{
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.calendar-dayToday button{
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #61dafb;
+}
+
+.calendar-day button:hover{
+  background-color: wheat;
+  cursor: pointer;
+}
+
+.calendar-dayToday button:hover{
+  cursor: pointer;
+  background-color: #9de4ff;
+}
+
+.calendar-navi {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-navi-month {
+  display: flex;
+  flex-direction: row;
+}
+
+.calendar-navi-month button {
+  flex: 1;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.calendar-navi-month button:hover {
+  cursor: pointer;
+  background-color: wheat;
+}
+
+.calendar-navi-year {
+  display: flex;
+  flex-direction: row;
+}
+
+.calendar-navi-year button {
+  flex: 1;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.calendar-navi-year button:hover {
+  cursor: pointer;
+  background-color: wheat;
+}
