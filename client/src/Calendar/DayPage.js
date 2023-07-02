@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function Day() {
-  const [backendData, setBackendData] = useState([]);
-
   const { absoluteDate } = useParams();
+  const [backendData, setBackendData] = useState([]);
+  const [formData, setFormData] = useState({
+    //date: absoluteDate,
+    name: "",
+    description: "",
+  });
 
   useEffect(() => {
     fetch(`/day/${absoluteDate}`)
@@ -25,6 +29,48 @@ export default function Day() {
       });
   }, [absoluteDate]);
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "name") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        name: value,
+      }));
+    } else if (name === "description") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        description: value,
+      }));
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch(`/day/addTask/${absoluteDate}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        absoluteDate,
+        name: formData.name,
+        description: formData.description,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response not ok!");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Data saved: ", data);
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
+
   return (
     <div className="day-page">
       <h1>Day Page</h1>
@@ -41,15 +87,25 @@ export default function Day() {
       )}
 
       <div>
-        <form className="taskInput">
+        <form className="taskInput" onSubmit={handleSubmit}>
           <label>Date: {absoluteDate}</label>
           <label>
             Name:
-            <input type="text" name="name" />
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Description:
-            <textarea type="text" name="name" />
+            <textarea
+              type="text"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
           </label>
           <input type="submit" value="Submit" />
         </form>

@@ -7,3 +7,6 @@ const taskSchema = new mongoose.Schema({
     name: String,
     description: String
 })
+
+// Create the model
+module.exports = mongoose.model('Task', taskSchema);
