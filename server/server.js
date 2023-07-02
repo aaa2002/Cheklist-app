@@ -1,9 +1,11 @@
 const express = require ('express');
+const cors = require ('cors');
 const app = express();
 const mongoose = require("mongoose");
 const dayRoutes = require('./api/routes/days.js');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 app.use(express.json());
+app.use(cors());
 
 const {response} = require("express");
 

@@ -1,16 +1,26 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import moment from "moment";
+import { useParams } from "react-router-dom";
 
 export default function Day() {
   const [backendData, setBackendData] = useState([{}]);
 
+  const { absoluteDate } = useParams();
+
   useEffect(() => {
-    fetch("/day")
-      .then((response) => response.json())
+    fetch(`/day/${absoluteDate}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
-        setBackendData(data);
+        // Handle the response data
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   }, []);
 
@@ -25,6 +35,7 @@ export default function Day() {
 
       <div>
         <form className="taskInput">
+          <label>Date: {absoluteDate}</label>
           <label>
             Name:
             <input type="text" name="name" />

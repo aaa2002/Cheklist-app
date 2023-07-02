@@ -5,8 +5,9 @@ const router = express.Router();
 const Task = require('../models/task');
 
 
-router.get("/", (req, res, next) => {
-    res.json({"tasks": ["task 1", "task 2", "task  3"] });
-});
+router.get("/day/:absoluteDate", (req, res, next) => {
+    const tasks = ["task 1", "task 2", "task 3"];
+    res.json({ tasks });
+  });
 
 module.exports = router;

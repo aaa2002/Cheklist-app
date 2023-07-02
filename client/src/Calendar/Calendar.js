@@ -2,7 +2,6 @@ import React from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-import { Route, Routes, BrowserRouter as Router} from "react-router-dom";
 
 export default class Calendar extends React.Component {
   WeekDayShort = moment.weekdaysShort();
@@ -33,9 +32,9 @@ export default class Calendar extends React.Component {
 
   render() {
     const currentDate = moment();
-    const currentDay = () => {
-      return currentDate.format("DD");
-    };
+    // const currentDay = () => {
+    //   return currentDate.format("DD");
+    // };
 
     const firstDayOfMonth = () => {
       return this.state.stateObject.startOf("month").format("d");
@@ -55,13 +54,14 @@ export default class Calendar extends React.Component {
     let daysInMonth = [];
     for (let day = 1; day <= this.state.stateObject.daysInMonth(); day++) {
       let today =
-        day == moment().format("D") &&
-        this.state.stateObject.format("MM") == moment().format("MM")
+        day === moment().format("D") &&
+        this.state.stateObject.format("MM") === moment().format("MM")
           ? "Today"
           : "";
+          const absoluteDate = moment().date(day).format("DD-MM-YYYY");
       daysInMonth.push(
         <td key={day} className={`calendar-day${today}`}>
-          <Link to="/day">
+          <Link to={`/day/${absoluteDate}`}>
             <button>
               <div className="date-number">{day}</div>
               <div className="tasks-number">tasks</div>
