@@ -22,12 +22,13 @@ export default function Day() {
       })
       .then((data) => {
         // Handle the response data
-        setBackendData(data.tasks);
+        console.log("API Response:", data);
+        setBackendData(data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [absoluteDate]);
+  }, [absoluteDate, backendData]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -77,9 +78,10 @@ export default function Day() {
       {typeof backendData === "undefined" ? (
         <p>Loading...</p>
       ) : (
-        backendData.map((task, i) => (
-          <div className="task">
-            <p key={i}>{task}</p>
+        backendData.map((task) => (
+          <div className="task" key={task._id}>
+            <p>{task.name}</p>
+            <p>{task.description}</p>
             <button className="updateButton">Update</button>
             <button className="deleteButton">Delete</button>
           </div>
