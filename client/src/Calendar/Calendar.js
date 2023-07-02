@@ -54,8 +54,8 @@ export default class Calendar extends React.Component {
     let daysInMonth = [];
     for (let day = 1; day <= this.state.stateObject.daysInMonth(); day++) {
       let today =
-        day === moment().format("D") &&
-        this.state.stateObject.format("MM") === moment().format("MM")
+        day == moment().format("D") &&
+        this.state.stateObject.format("MM") == moment().format("MM")
           ? "Today"
           : "";
           const absoluteDate = moment().date(day).format("DD-MM-YYYY");

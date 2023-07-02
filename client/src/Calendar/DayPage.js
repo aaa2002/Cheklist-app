@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function Day() {
-  const [backendData, setBackendData] = useState([{}]);
+  const [backendData, setBackendData] = useState([]);
 
   const { absoluteDate } = useParams();
 
@@ -18,19 +18,26 @@ export default function Day() {
       })
       .then((data) => {
         // Handle the response data
+        setBackendData(data.tasks);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  }, [absoluteDate]);
 
   return (
     <div className="day-page">
       <h1>Day Page</h1>
-      {typeof backendData.tasks === "undefined" ? (
+      {typeof backendData === "undefined" ? (
         <p>Loading...</p>
       ) : (
-        backendData.tasks.map((task, i) => <p key={i}>{task}</p>)
+        backendData.map((task, i) => (
+          <div className="task">
+            <p key={i}>{task}</p>
+            <button className="updateButton">Update</button>
+            <button className="deleteButton">Delete</button>
+          </div>
+        ))
       )}
 
       <div>
