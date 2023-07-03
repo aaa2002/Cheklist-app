@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 export default function Day() {
   const { absoluteDate } = useParams();
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [backendData, setBackendData] = useState([]);
   const [formData, setFormData] = useState({
     //date: absoluteDate,
@@ -72,7 +73,12 @@ export default function Day() {
       });
   };
 
-  const handleUpdate = () => {};
+  const updateClick = () => {
+    setShowUpdateForm(true);
+  };
+  const handleUpdate = () => {
+    setShowUpdateForm(false);
+  };
 
   // const handleDelete = (event) => {
   //   event.preventDefault();
@@ -88,9 +94,38 @@ export default function Day() {
           <div className="task" key={task._id}>
             <h1>{task.name}</h1>
             <p>{task.description}</p>
-            <button onClick={handleUpdate} className="updateButton">
-              Update
-            </button>
+            {showUpdateForm === false ? (
+              <button onClick={updateClick} className="updateButton">
+                Update
+              </button>
+            ) : (
+              <form className="taskInput">
+                <label>
+                  Name:
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Description:
+                  <textarea
+                    type="text"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                  />
+                </label>
+                <input
+                  onClick={handleUpdate}
+                  type="submit"
+                  value="Submit"
+                />
+              </form>
+            )}
+
             <button
               onClick={(event) => {
                 event.preventDefault();

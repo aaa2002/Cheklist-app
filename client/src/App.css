@@ -199,7 +199,7 @@
 .taskInput input[type="text"] {
   width: 100%;
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #2b4f5b;
   border-radius: 4px;
   box-sizing: border-box;
   margin-bottom: 10px;
@@ -220,7 +220,7 @@
 
 .taskInput textarea[type="text"] {
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #2b4f5b;
   border-radius: 4px;
   box-sizing: border-box;
   margin-bottom: 10px;
@@ -280,4 +280,60 @@
 
 .updateButton:hover {
   background-color: #907428;
+}
+
+.task {
+  background-color: #e0e0e0;
+  width: 30%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.task h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.task p {
+  margin-bottom: 10px;
+}
+
+
+.task .taskInput {
+  margin-top: 10px;
+  align-self: center;
+  width: 50%;
+}
+
+.task .taskInput label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task .taskInput input[type="text"],
+.task .taskInput textarea[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #2b4f5b;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.task .taskInput input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task .taskInput input[type="submit"]:hover {
+  background-color: #45a049;
 }
