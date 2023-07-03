@@ -49,4 +49,18 @@ router.post("/addTask/:absoluteDate", (req, res, next) => {
     });
 });
 
+router.delete("/deleteTask/:taskID", (req, res, next) => {
+    const id = req.params.taskID;
+    Task.deleteOne({_id: id})
+    .exec()
+    .then(restult => {
+        res.status(200).json(restult);
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+});
+
 module.exports = router;

@@ -72,6 +72,12 @@ export default function Day() {
       });
   };
 
+  const handleUpdate = () => {};
+
+  // const handleDelete = (event) => {
+  //   event.preventDefault();
+  // };
+
   return (
     <div className="day-page">
       <h1>Day Page</h1>
@@ -80,10 +86,42 @@ export default function Day() {
       ) : (
         backendData.map((task) => (
           <div className="task" key={task._id}>
-            <p>{task.name}</p>
+            <h1>{task.name}</h1>
             <p>{task.description}</p>
-            <button className="updateButton">Update</button>
-            <button className="deleteButton">Delete</button>
+            <button onClick={handleUpdate} className="updateButton">
+              Update
+            </button>
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                fetch(`/day/deleteTask/${task._id}`, {
+                  method: "DELETE",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    absoluteDate,
+                    name: formData.name,
+                    description: formData.description,
+                  }),
+                })
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Network response not ok!");
+                    }
+                    return response.json();
+                  })
+                  .then((data) => {
+                    console.log("Data saved: ", data);
+                  })
+                  .catch((error) => {
+                    console.error("Error: ", error);
+                  });
+              }}
+              className="deleteButton"
+            >
+              Delete
+            </button>
           </div>
         ))
       )}
