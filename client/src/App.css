@@ -15,7 +15,13 @@
 
 * {
   color: #282c34;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+body {
+  background-color: #a4c8ff;
 }
 
 .App-header {
@@ -61,14 +67,14 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  background-color: #104657;
+  background-color: #a4c8ff;
 }
 
 .calendar-body {
   display: flex;
   height: 100%;
   flex-direction: column;
-  background-color: #c533cb;
+  background-color: #a4c8ff;
 }
 
 .week-days {
@@ -76,7 +82,7 @@
   width: 100%;
   flex-direction: row;
   justify-content: space-around;
-  background-color: #ff0000;
+  background-color: #61dafb;
 }
 
 .day-row {
@@ -91,10 +97,10 @@
 
 .calendar-dayToday {
   flex: 1;
-  background-color: #2b4f5b;
+  background-color: #518da100;
 }
 
-.calendar-day button{
+.calendar-day button {
   height: 100%;
   width: 100%;
   border: none;
@@ -103,7 +109,7 @@
   font-weight: bold;
 }
 
-.calendar-dayToday button{
+.calendar-dayToday button {
   height: 100%;
   width: 100%;
   border: none;
@@ -113,12 +119,12 @@
   background-color: #61dafb;
 }
 
-.calendar-day button:hover{
+.calendar-day button:hover {
   background-color: wheat;
   cursor: pointer;
 }
 
-.calendar-dayToday button:hover{
+.calendar-dayToday button:hover {
   cursor: pointer;
   background-color: #9de4ff;
 }
@@ -300,7 +306,6 @@
 .task p {
   margin-bottom: 10px;
 }
-
 
 .task .taskInput {
   margin-top: 10px;

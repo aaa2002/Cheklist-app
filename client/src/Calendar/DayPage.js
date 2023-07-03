@@ -12,6 +12,10 @@ export default function Day() {
     name: "",
     description: "",
   });
+  const [updateFormData, setUpdateFormData] = useState({
+    name: formData.name,
+    description: formData.description,
+  });
 
   useEffect(() => {
     fetch(`/day/${absoluteDate}`)
@@ -29,7 +33,7 @@ export default function Day() {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [absoluteDate, backendData]);
+  }, [absoluteDate, backendData, showUpdateForm]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -40,6 +44,16 @@ export default function Day() {
       }));
     } else if (name === "description") {
       setFormData((prevFormData) => ({
+        ...prevFormData,
+        description: value,
+      }));
+    } else if (name === "updateName") {
+      setUpdateFormData((prevFormData) => ({
+        ...prevFormData,
+        name: value,
+      }));
+    } else if (name === "updateDescription") {
+      setUpdateFormData((prevFormData) => ({
         ...prevFormData,
         description: value,
       }));
@@ -73,17 +87,6 @@ export default function Day() {
       });
   };
 
-  const updateClick = () => {
-    setShowUpdateForm(true);
-  };
-  const handleUpdate = () => {
-    setShowUpdateForm(false);
-  };
-
-  // const handleDelete = (event) => {
-  //   event.preventDefault();
-  // };
-
   return (
     <div className="day-page">
       <h1>Day Page</h1>
@@ -95,7 +98,16 @@ export default function Day() {
             <h1>{task.name}</h1>
             <p>{task.description}</p>
             {showUpdateForm === false ? (
-              <button onClick={updateClick} className="updateButton">
+              <button
+                onClick={() => {
+                  setUpdateFormData({
+                    name: task.name,
+                    description: task.description,
+                  });
+                  setShowUpdateForm(true);
+                }}
+                className="updateButton"
+              >
                 Update
               </button>
             ) : (
@@ -104,8 +116,8 @@ export default function Day() {
                   Name:
                   <input
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="updateName"
+                    value={updateFormData.name}
                     onChange={handleChange}
                   />
                 </label>
@@ -113,16 +125,50 @@ export default function Day() {
                   Description:
                   <textarea
                     type="text"
-                    name="description"
-                    value={formData.description}
+                    name="updateDescription"
+                    value={updateFormData.description}
                     onChange={handleChange}
                   />
                 </label>
                 <input
-                  onClick={handleUpdate}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    if (updateFormData.name && updateFormData.description) {
+                      fetch(`/day/updateTask/${task._id}`, {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          absoluteDate,
+                          name: updateFormData.name,
+                          description: updateFormData.description,
+                        }),
+                      })
+                        .then((response) => {
+                          if (!response.ok) {
+                            throw new Error("Network response not ok!");
+                          }
+                          return response.json();
+                        })
+                        .then((data) => {
+                          console.log("Data saved: ", data);
+                        })
+                        .catch((error) => {
+                          console.error("Error: ", error);
+                        });
+                    }
+                    setShowUpdateForm(false);
+                  }}
                   type="submit"
                   value="Submit"
                 />
+                <button
+                  className="deleteButton"
+                  onClick={() => setShowUpdateForm(false)}
+                >
+                  Cancel
+                </button>
               </form>
             )}
 
